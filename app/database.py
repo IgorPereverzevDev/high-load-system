@@ -2,7 +2,8 @@ from supabase import create_client, Client
 import os
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", "http://127.0.0.1:54321")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "your_supabase_key")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY",
+                         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0")
 
 supabase_client: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 

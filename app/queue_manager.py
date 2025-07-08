@@ -3,14 +3,12 @@ import time
 import redis
 from typing import Dict, Any
 from dramatiq.brokers.redis import RedisBroker
-from dramatiq.middleware import TimeLimit
 
 from database import supabase_client
 from openai_mock import mock_openai_api
 from rate_limiter import rate_limiter, output_rate_limiter
 
 redis_broker = RedisBroker(url="redis://redis:6379")
-redis_broker.add_middleware(TimeLimit(time_limit=30_000))
 dramatiq.set_broker(redis_broker)
 
 redis_client = redis.from_url("redis://redis:6379")

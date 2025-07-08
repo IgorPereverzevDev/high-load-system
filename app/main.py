@@ -82,7 +82,7 @@ async def process_request(request: RequestModel):
             "status": "pending",
             "sequence_number": sequence_number,
             "created_at": time.time()
-        })
+        }).execute()
         logger.info(f"Created request {request_id} with sequence {sequence_number}")
     except Exception as e:
         logger.error(f"Database error: {e}")
@@ -101,7 +101,7 @@ async def process_request(request: RequestModel):
 @app.get("/api/status/{request_id}")
 async def get_status(request_id: str):
     try:
-        result = supabase_client.table("requests").select("*").eq("id", request_id)
+        result = supabase_client.table("requests").select("*").eq("id", request_id).execute()
 
         if hasattr(result, 'data') and result.data:
             return result.data[0]

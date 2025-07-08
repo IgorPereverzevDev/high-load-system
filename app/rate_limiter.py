@@ -17,13 +17,11 @@ class SystemState(Enum):
 
 class AdaptiveRateLimiter:
     def __init__(self, redis_url: str = None):
-        # Используем переменную окружения или fallback на Docker имя сервиса
         if redis_url is None:
             redis_url = os.getenv("REDIS_URL", "redis://redis:6379")
 
         try:
             self.redis_client = redis.from_url(redis_url)
-            # Проверяем подключение
             self.redis_client.ping()
             logger.info(f"✅ Redis connected successfully to {redis_url}")
         except Exception as e:

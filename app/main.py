@@ -5,7 +5,6 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
-import time
 
 from starlette.staticfiles import StaticFiles
 
@@ -80,8 +79,7 @@ async def process_request(request: RequestModel):
             "id": request_id,
             "payload": request.model_dump(),
             "status": "pending",
-            "sequence_number": sequence_number,
-            "created_at": time.time()
+            "sequence_number": sequence_number
         }).execute()
         logger.info(f"Created request {request_id} with sequence {sequence_number}")
     except Exception as e:
